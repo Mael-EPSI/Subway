@@ -1,0 +1,116 @@
+@using SubwaySurfer.Game
+@using SubwaySurfer.Rendering
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<canvas id="gameCanvas" tabindex="0"
+        @onkeydown="OnKeyDown" @onkeydown:preventDefault
+        @onkeyup="OnKeyUp"
+        @ontouchstart="OnTouchStart" @ontouchstart:preventDefault
+        @ontouchend="OnTouchEnd" @ontouchend:preventDefault />
+
+@code {
+    private GameEngine _engine = new();
+    private GameRenderer _renderer = null!;
+    private CancellationTokenSource _cts = new();
+    private readonly HashSet<string> _keysDown = new();
+    private double _touchSX, _touchSY;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        await JS.InvokeVoidAsync("GameInterop.init");
+        _renderer = new GameRenderer(JS);
+
+        _ = GameLoopAsync(_cts.Token);
+    }
+
+    private async Task GameLoopAsync(CancellationToken ct)
+    {
+        double lastTime = await JS.InvokeAsync<double>("GameInterop.now") / 1000.0;
+
+        while (!ct.IsCancellationRequested)
+        {
+            double now = await JS.InvokeAsync<double>("GameInterop.now") / 1000.0;
+            double dt = now - lastTime;
+            lastTime = now;
+            if (dt > 0.05) dt = 0.05;
+
+            _engine.Update(dt);
+            await _renderer.RenderFrame(_engine.State);
+
+            // Yield to browser for ~16ms (requestAnimationFrame equivalent)
+            await Task.Delay(16, ct).ConfigureAwait(false);
+        }
+    }
+
+    // ─── Keyboard ───────────────────────────────────
+    private void OnKeyDown(KeyboardEventArgs e)
+    {
+        if (_keysDown.Contains(e.Code)) return;
+        _keysDown.Add(e.Code);
+        HandleAction(e.Code);
+    }
+
+    private void OnKeyUp(KeyboardEventArgs e)
+    {
+        _keysDown.Remove(e.Code);
+    }
+
+    private void HandleAction(string code)
+    {
+        var phase = _engine.State.Phase;
+
+        if (phase == GamePhase.Playing)
+        {
+            if (code is "ArrowLeft" or "KeyA") _engine.ActionLeft();
+            if (code is "ArrowRight" or "KeyD") _engine.ActionRight();
+            if (code is "ArrowUp" or "KeyW" or "Space") _engine.ActionJump();
+        }
+
+        if (phase == GamePhase.Menu && code is "Space" or "Enter")
+            _engine.ActionStart();
+
+        if (phase == GamePhase.GameOver && code is "Space" or "Enter")
+            _engine.ActionRestart();
+    }
+
+    // ─── Touch ──────────────────────────────────────
+    private void OnTouchStart(TouchEventArgs e)
+    {
+        if (e.Touches.Length > 0)
+        {
+            _touchSX = e.Touches[0].ClientX;
+            _touchSY = e.Touches[0].ClientY;
+        }
+    }
+
+    private void OnTouchEnd(TouchEventArgs e)
+    {
+        if (e.ChangedTouches.Length == 0) return;
+        double dx = e.ChangedTouches[0].ClientX - _touchSX;
+        double dy = e.ChangedTouches[0].ClientY - _touchSY;
+
+        if (Math.Abs(dx) > Math.Abs(dy) && Math.Abs(dx) > 30)
+        {
+            if (dx > 0) _engine.ActionRight();
+            else _engine.ActionLeft();
+        }
+        else if (dy < -30)
+        {
+            _engine.ActionJump();
+        }
+        else
+        {
+            if (_engine.State.Phase == GamePhase.Menu) _engine.ActionStart();
+            else if (_engine.State.Phase == GamePhase.GameOver) _engine.ActionRestart();
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+    }
+}
