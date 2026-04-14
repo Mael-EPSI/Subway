@@ -400,9 +400,8 @@ public class GameEngineTests
     public void StartGame_ResetsScore()
     {
         var engine = CreatePlayingEngine();
-        // Use larger dt to accumulate score (0.03 multiplier needs bigger steps)
         for (int i = 0; i < 50; i++)
-            engine.Update(0.1);
+            engine.Update(0.016);
         Assert.True(engine.State.Score > 0);
 
         // Game over
