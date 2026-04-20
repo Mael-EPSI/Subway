@@ -1,0 +1,22 @@
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\MainWindow.baml
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\App.g.cs
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer_MarkupCompile.cache
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer.g.resources
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer.GeneratedMSBuildEditorConfig.editorconfig
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer.AssemblyInfoInputs.cache
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer.AssemblyInfo.cs
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer.csproj.CoreCompileInputs.cache
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer.sourcelink.json
+D:\test\Subway\SubwaySurfer\bin\Debug\net8.0-windows\SubwaySurfer.exe
+D:\test\Subway\SubwaySurfer\bin\Debug\net8.0-windows\SubwaySurfer.deps.json
+D:\test\Subway\SubwaySurfer\bin\Debug\net8.0-windows\SubwaySurfer.runtimeconfig.json
+D:\test\Subway\SubwaySurfer\bin\Debug\net8.0-windows\SubwaySurfer.dll
+D:\test\Subway\SubwaySurfer\bin\Debug\net8.0-windows\SubwaySurfer.pdb
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer.dll
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\refint\SubwaySurfer.dll
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer.pdb
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer.genruntimeconfig.cache
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\ref\SubwaySurfer.dll
+D:\test\Subway\SubwaySurfer\bin\Debug\net8.0-windows\Assets\Beat It.mp3
+D:\test\Subway\SubwaySurfer\obj\Debug\net8.0-windows\SubwaySurfer_Content.g.cs
