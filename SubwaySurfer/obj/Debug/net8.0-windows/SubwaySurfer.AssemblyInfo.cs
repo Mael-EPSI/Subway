@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SubwaySurfer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97d62a872cee8ab642ea79c2b1083c2377281b3c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af4ef1a0dd436293161eecc4f72b3e58d2d4d32c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SubwaySurfer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SubwaySurfer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

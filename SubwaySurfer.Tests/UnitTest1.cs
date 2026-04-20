@@ -1,4 +1,6 @@
-﻿namespace SubwaySurfer.Tests;
+﻿using Xunit;
+
+namespace SubwaySurfer.Tests;
 
 public class UnitTest1
 {
